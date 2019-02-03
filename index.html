@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<section class="header">
+		<div class="container">
+			<div class="row mt-2">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="#"><img class='menuLogo' src="img/smil.jpg" alt="logo"></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">О нас</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Наши кухни</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class = 'todoSection'>
+		<div class="container">
+			<div class="row mt-5">
+				<div class="col-md-7 col-12">
+					<div class="card">
+						<div class="card-header">
+							ToDo
+						</div>
+						<div class="card-body">
+							<ul id="TasksList" class="list-group">
+								<!-- <li class="list-group-item">Cras justo odio</li> -->
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-5 col-12 mt-md-0 mt-5">
+					<div class="card">
+						<div class="card-header">
+							Новая задача
+						</div>
+						<div class="card-body">
+							<form name='InputToDoTask'>
+								<div class="input-group">
+									<input id="todoText" type="text" class="form-control" placeholder="Input new task here" aria-describedby="button-addon2">
+									<div class="input-group-append">
+										<button class="btn btn-outline-dark" type="submit" id="button-addon2">Add</button>
+									</div>
+									<div class="invalid-feedback col-12">
+										Поле пустое
+									</div>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<script src="js/js_lessons.js"></script>
+</body>
+</html>
