@@ -5,13 +5,7 @@
     'Четвертая задача'
 ];*/
 
-let tasks = [
-    {
-        id: 'fk2gVwuW6IhDOUZ',
-        text: 'One task'
-
-    }
-];
+let tasks = JSON.parse( localStorage.getItem('tasks') );
 
 let ul = document.getElementById('TasksList');
 let addTaskForm = document.forms["InputToDoTask"];
@@ -39,6 +33,7 @@ function generateList (tasks) {
     for (let i = 0; i < tasks.length; i++) {
         ul.appendChild(listTemplate(tasks[i]));
     }
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 // Создаем гипертекстовую строку по правилам Bootstrap 4
@@ -67,7 +62,7 @@ function listTemplate(task) {
 // Добавление новой задачи
 function  addTask(task) {
         if (task !== '') {
-            tasks.unshift(task);
+            tasks.unshift( {'id': generateId(), 'text': task});
             generateList(tasks);
         }
 }
