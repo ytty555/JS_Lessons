@@ -1,8 +1,16 @@
-let tasks = [
+/*let tasks = [
     'Выучить Javascript',
     'Вторая задача',
     'Третяя задача',
     'Четвертая задача'
+];*/
+
+let tasks = [
+    {
+        id: 'fk2gVwuW6IhDOUZ',
+        text: 'One task'
+
+    }
 ];
 
 let ul = document.getElementById('TasksList');
@@ -37,9 +45,10 @@ function generateList (tasks) {
 function listTemplate(task) {
     let li = document.createElement('li');
     li.className = 'list-group-item d-flex align-items-center';
+    li.setAttribute('data-id', task.id);
 
     let span = document.createElement('span');
-    span.textContent = task;
+    span.textContent = task.text;
     li.appendChild(span);
 
     // Создаем таг i для пиктограммы мусорной корзины и редактирования
@@ -76,23 +85,24 @@ function deleteAllElemChild() {
     }
 }
 
+// Удаляем выбранную Task
+function deleteListItem(id) {
+    for (let i = 0; i < tasks.length; i++) {
+        if ( tasks[i].id === id ) {
+            tasks.splice(i, 1);
+            break;
+        }
+    }
+    localStorage.setItem('tasks', JSON.stringify(tasks)); // Сохраняем в localStorage
+}
+
 // Слушаем события от детей-элементов ul
 ul.addEventListener('click', function (e) {
-    // если нажата иконка Корзина-удалить, то...
+    // если нажата иконка Удалить, то...
     if ( e.target.classList.contains('deleteTaskIcon') ) {
-        // Находим родителя
         let parent = e.target.closest('li');
-
-        // Определяем Тестовый контент родителя,
-        // который будет равет элементу массива tasks
-        let textTaskToDelete = parent.textContent;
-
-        // Находим индекс задачи на удаление в массиве tasks
-        let indexTaskToDelete = tasks.indexOf(textTaskToDelete);
-
-        // Удаляем элемент массива по его индексу,
-        tasks.splice(indexTaskToDelete, 1);
-         // Удаляем найденный тег li
+        let id = parent.dataset.id;
+        deleteListItem(id);
         parent.remove();
     }
 
