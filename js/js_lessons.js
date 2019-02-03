@@ -10,9 +10,7 @@ let tasks = JSON.parse( localStorage.getItem('tasks') );
 let ul = document.getElementById('TasksList');
 let addTaskForm = document.forms["InputToDoTask"];
 let inputTaskForm = addTaskForm.elements['todoText'];
-
-let oldValueTaskForEdit = '';
-let newValueTaskForEdit = '';
+let notificationAlertBlock = document.querySelector('.notification-alert');
 
 // Генерируем ID из 15 знаков
 function generateId() {
@@ -27,6 +25,7 @@ function generateId() {
      return id;
 }
 
+// Отображаем актуальный список задач
 function generateList (tasks) {
     clearViewElemChild(ul);
 
@@ -62,8 +61,17 @@ function listTemplate(task) {
 // Добавление новой задачи
 function  addTask(task) {
         if (task !== '') {
-            tasks.unshift( {'id': generateId(), 'text': task});
+            tasks.unshift( {
+                id: generateId(),
+                text: task
+            });
             generateList(tasks);
+
+            message( {
+                text: 'Task added success',
+                cssClass: 'alert-success',
+                timeout: 4000
+            })
         }
 }
 
@@ -89,6 +97,12 @@ function deleteListItem(id) {
         }
     }
     localStorage.setItem('tasks', JSON.stringify(tasks)); // Сохраняем в localStorage
+
+    message( {
+        text: 'Task deleted',
+        cssClass: 'alert-warning',
+        timeout: 4000
+    })
 }
 
 // Слушаем события от детей-элементов ul
@@ -103,17 +117,43 @@ ul.addEventListener('click', function (e) {
 
     // если нажата иконта Редактировать, то...
     if ( e.target.classList.contains('editTaskIcon') ) {
+        // Меняем иконку на "Сохранить"
+        e.target.classList.toggle('fa-save');
         // Находим родителя нажатой иконки Edit
         let parent = e.target.closest('li');
+        let id = parent.dataset.id;
         span = parent.querySelector('span');
-        // делаем span редактируемым
-        span.contentEditable = true;
-        span.focus();
-        // Получаем старое значение Task и записываем
-        // его в глобальную переменную
-        oldValueTaskForEdit = span.innerHTML;
+
+        // Если значек нажата иконка Редактирование, то
+        // делаем span редактируемым и передаем ему фокус
+        if (e.target.classList.contains('fa-save')) {
+            span.contentEditable = true;
+            span.focus();
+        } else {
+            span.contentEditable = false;
+            span.blur();
+            editListItem(id, span.textContent);
+        }
+
      }
 })
+
+// Редактируем текст задачи Task для заданного объекта с переданным id
+function editListItem(id, newValue) {
+    for (let i = 0; i < tasks.length; i++) {
+        if ( tasks[i].id === id ) {
+            tasks[i].text = newValue;
+            break;
+        }
+    }
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+    message( {
+        text: 'Text update success',
+        cssClass: 'alert-success',
+        timeout: 4000
+    })
+}
 
 // Слушаем событие от кнопки с функцией submit
 addTaskForm.addEventListener('submit', function (e) {
@@ -128,5 +168,15 @@ addTaskForm.addEventListener('submit', function (e) {
     }
 
 })
+
+function message(settings) {
+    notificationAlertBlock.classList.add(settings.cssClass);
+    notificationAlertBlock.textContent = settings.text;
+    notificationAlertBlock.classList.add('show');
+
+    setTimeout( function () {
+        notificationAlertBlock.classList.remove('show');
+    }, settings.timeout );
+}
 
 generateList(tasks);
