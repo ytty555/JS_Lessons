@@ -12,6 +12,18 @@ let inputTaskForm = addTaskForm.elements['todoText'];
 let oldValueTaskForEdit = '';
 let newValueTaskForEdit = '';
 
+// Генерируем ID из 15 знаков
+function generateId() {
+    let id = '';
+    let words = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+
+    for (let i = 0; i < 15; i++) {
+        let position = Math.floor(Math.random() * words.length);
+        id += words[position];
+     }
+
+     return id;
+}
 
 function generateList (tasks) {
     clearViewElemChild(ul);
@@ -64,8 +76,9 @@ function deleteAllElemChild() {
     }
 }
 
-
+// Слушаем события от детей-элементов ul
 ul.addEventListener('click', function (e) {
+    // если нажата иконка Корзина-удалить, то...
     if ( e.target.classList.contains('deleteTaskIcon') ) {
         // Находим родителя
         let parent = e.target.closest('li');
@@ -83,19 +96,21 @@ ul.addEventListener('click', function (e) {
         parent.remove();
     }
 
+    // если нажата иконта Редактировать, то...
     if ( e.target.classList.contains('editTaskIcon') ) {
         // Находим родителя нажатой иконки Edit
         let parent = e.target.closest('li');
         span = parent.querySelector('span');
+        // делаем span редактируемым
         span.contentEditable = true;
         span.focus();
-        // Получаем старое значение Task
+        // Получаем старое значение Task и записываем
+        // его в глобальную переменную
         oldValueTaskForEdit = span.innerHTML;
-        console.log(oldValueTaskForEdit);
-    }
+     }
 })
 
-
+// Слушаем событие от кнопки с функцией submit
 addTaskForm.addEventListener('submit', function (e) {
     e.preventDefault();
     let addTaskTxt = inputTaskForm.value;
