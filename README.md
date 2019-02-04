@@ -1,1 +1,2 @@
 # Курс Javascript Hero
+Описание:
