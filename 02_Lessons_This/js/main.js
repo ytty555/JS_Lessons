@@ -1,6 +1,6 @@
-let module = (function() {
+let module = (function () {
     let counter = 0;
-    
+
     function setCounter(value) {
         counter = value;
         return counter;
@@ -38,7 +38,7 @@ let module = (function() {
 const rectangle = {
     width: 11,
     height: 3,
-    getSquare: function() {
+    getSquare: function () {
         return this.width * this.height;
     }
 }
@@ -51,7 +51,7 @@ const goods = {
     getPrice: function () {
         return price;
     },
-    getPriceWithDiscount: function() {
+    getPriceWithDiscount: function () {
         discountInt = parseInt(this.discount) / 100;
         return this.price * (1 - discountInt);
     }
@@ -61,12 +61,12 @@ const goods = {
 
 const user = {
     name: 'Abraham',
-    getName: function() {
+    getName: function () {
         return getUserName(this);
     }
 };
 
-function getUserName (Obj) {
+function getUserName(Obj) {
     return Obj.name;
 }
 
@@ -75,7 +75,7 @@ function getUserName (Obj) {
 
 let Obj = {
     height: 10,
-    incHeight: function() {
+    incHeight: function () {
         return ++this.height;
     }
 }
