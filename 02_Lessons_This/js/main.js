@@ -334,7 +334,7 @@ function filter(arr, handler) {
 
 function inBetween(a, b) {
     return (function (Value) {
-        if (Value >= a && Value <= b ) {
+        if (Value >= a && Value <= b) {
             return true;
         } else {
             return false;
@@ -343,10 +343,34 @@ function inBetween(a, b) {
 };
 
 function inArray(array) {
-   return function(x) {
-       return array.indexOf(x) != -1;
-   }
+    return function (x) {
+        return array.indexOf(x) != -1;
+    }
 }
 
 
-console.log(filter(arr, inArray([1, 2, 3, 40])));
+// console.log(filter(arr, inArray([1, 2, 3, 40])));
+
+// Урок Замыкания 
+
+function makeArmy() {
+
+    var shooters = [];
+    let nbr = [];
+
+    for (var i = 0; i < 10; i++) {
+        nbr[i] = i;
+        var shooter = function () { // функция-стрелок
+            alert(nbr[i]); // выводит свой номер
+        };
+        shooters.push(shooter);
+    }
+
+    return shooters;
+}
+
+var army = makeArmy();
+
+army[0](); // стрелок выводит 10, а должен 0
+army[5](); // стрелок выводит 10...
+  // .. все стрелки выводят 10 вместо 0,1,2...9
