@@ -1,32 +1,32 @@
-let module = (function () {
-    let counter = 0;
+// let module = (function () {
+//     let counter = 0;
 
-    function setCounter(value) {
-        counter = value;
-        return counter;
-    }
+//     function setCounter(value) {
+//         counter = value;
+//         return counter;
+//     }
 
-    function plusCounter() {
-        counter++;
-        return counter;
-    }
+//     function plusCounter() {
+//         counter++;
+//         return counter;
+//     }
 
-    function getCounter() {
-        return counter;
-    }
+//     function getCounter() {
+//         return counter;
+//     }
 
-    function reset() {
-        counter = 0;
-        return counter;
-    }
+//     function reset() {
+//         counter = 0;
+//         return counter;
+//     }
 
-    return {
-        setCounter: setCounter,
-        getCounter: getCounter,
-        plusCounter: plusCounter,
-        reset: reset
-    }
-})();
+//     return {
+//         setCounter: setCounter,
+//         getCounter: getCounter,
+//         plusCounter: plusCounter,
+//         reset: reset
+//     }
+// })();
 
 // console.log(module.getCounter());
 
@@ -131,3 +131,147 @@ let element01 = {
 }
 
 let getElemtntHeight = element01.getHeight.bind(element01);
+
+// Урок Замыкания #1
+
+getBigName(userName);
+function getBigName (name) {
+    name = name + '';
+    // console.log(name.toUpperCase());
+    return name.toUpperCase();
+}
+var userName;
+
+// Урок Замыкания #3
+
+var food = 'cucumber';
+
+(function () {
+    var food = 'bread';
+    getfood();
+}) 
+
+function getfood () {
+    console.log(food);
+}
+
+// Урок Замыкания 
+let dollar, getDollar;
+
+(function () {
+    let dollar = 0;
+    getDollar = function () {
+        return dollar;
+    }
+}());
+
+dollar = 30;
+getDollar();
+
+// Урок Замыкания 
+
+var greet = 'Hello';
+
+(function () {
+    var text = 'World';
+    // console.log(greet + text);
+}())
+
+// Урок Замыкания 
+
+function minus(a = 0) {
+    return function (b) {
+        if (!b) b = 0;
+        return a-b;
+    }
+}
+
+// Урок Замыкания 
+
+function MultiplyMaker(num) {
+    return function (multiply) {
+        return num *= multiply;
+    };
+}
+
+let multiply = MultiplyMaker(2);
+
+// Урок Замыкания 
+
+let module = (function () {
+    let ResStr = '';
+
+    function SetStr (Str) {
+        if (!Str) Str = '';
+        if (typeof Str == 'number') {
+            Str += '';
+        }
+        this.ResStr = Str;
+        return this;
+    };
+
+    function GetStr () {
+        return this.ResStr;
+    };
+    
+    function GetLengthStr () {
+        return this.ResStr.length;
+    };
+
+    function GetReversStr () {
+        let reversStr = '';
+        
+        for (let i = this.ResStr.length - 1; i >= 0 ; i--) {
+            reversStr += this.ResStr[i];
+        }
+        return reversStr;
+    };
+
+    return {
+        SetStr: SetStr,
+        GetStr: GetStr,
+        GetLengthStr: GetLengthStr,
+        GetReversStr: GetReversStr
+    }
+})();
+
+// Урок Замыкания 
+let CalcResultat = 0;
+
+let Calc = (function () {
+    function SetValue (Value) {
+        CalcResultat = Value;
+        return this;
+    };
+
+    function Plus (Value) {
+        CalcResultat += Value;
+        return this;
+    };
+
+    function Multiply (Value) {
+        CalcResultat *= Value;
+        return this;
+    };
+
+    function GetValue () {
+        return CalcResultat.toFixed(2);
+    };
+
+    return {
+        SetValue: SetValue,
+        Plus: Plus,
+        Multiply: Multiply,
+        GetValue: GetValue
+    }
+})();
+
+Calc.SetValue(10.3455);
+console.log(CalcResultat);
+Calc.Plus(5);
+console.log(CalcResultat);
+Calc.Multiply(2);
+console.log(Calc.GetValue());
+
+console.log(Calc.SetValue(10.3455).Plus(100).Multiply(5).GetValue());
+
