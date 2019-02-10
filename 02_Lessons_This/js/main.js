@@ -100,4 +100,34 @@ const numerator = {
 
 
 let numbers = [4, 12, 0, 10, -2, 4];
-console.log(Math.min.apply(numbers, numbers));
+let minNumber = Math.min.apply(numbers, numbers);
+
+// Урок this #6
+
+const element = {
+    height: '15px',
+    marginTop: '5px',
+    marginBottom: '5px',
+    getFullHeight: function () {
+        return parseInt(this.height) + parseInt(this.marginTop) + parseInt(this.marginBottom);
+    }
+}
+
+const block = {
+    height: '5px',
+    marginTop: '3px',
+    marginBottom: '3px',
+}
+
+let blockFullHeight = element.getFullHeight.call(block);
+
+// Урок this #7
+
+let element01 = {
+    height: 25,
+    getHeight: function () {
+        return this.height;
+    }
+}
+
+let getElemtntHeight = element01.getHeight.bind(element01);
