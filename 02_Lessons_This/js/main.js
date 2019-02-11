@@ -6,4 +6,7 @@ function makeCounter () {
 }
 
 let counter = makeCounter();
-console.log(counter());
+
+// Квест задача 01
+
+const palmTree = (n = 1) => typeof n == 'number' && n > 0 ? 'n'.repeat(n): false;
