@@ -50,7 +50,7 @@ const rectangle = {
     getSquare: function () {
         return this.width * this.height;
     }
-}
+};
 
 // this #2.
 
@@ -58,13 +58,13 @@ const goods = {
     price: 10,
     discount: '15%',
     getPrice: function () {
-        return price;
+        return this.price;
     },
     getPriceWithDiscount: function () {
-        discountInt = parseInt(this.discount) / 100;
+        let discountInt = parseInt(this.discount) / 100;
         return this.price * (1 - discountInt);
     }
-}
+};
 
 // this #3.
 
@@ -87,7 +87,7 @@ let Obj = {
     incHeight: function () {
         return ++this.height;
     }
-}
+};
 
 // this #5.
 
@@ -105,7 +105,7 @@ const numerator = {
         this.value--;
         return this;
     }
-}
+};
 
 
 let numbers = [4, 12, 0, 10, -2, 4];
@@ -120,13 +120,13 @@ const element = {
     getFullHeight: function () {
         return parseInt(this.height) + parseInt(this.marginTop) + parseInt(this.marginBottom);
     }
-}
+};
 
 const block = {
     height: '5px',
     marginTop: '3px',
     marginBottom: '3px',
-}
+};
 
 let blockFullHeight = element.getFullHeight.call(block);
 
@@ -137,13 +137,14 @@ let element01 = {
     getHeight: function () {
         return this.height;
     }
-}
+};
 
 let getElemtntHeight = element01.getHeight.bind(element01);
 
 // Урок Замыкания #1
 
 getBigName(userName);
+
 function getBigName(name) {
     name = name + '';
     // console.log(name.toUpperCase());
@@ -158,7 +159,8 @@ var food = 'cucumber';
 (function () {
     var food = 'bread';
     getfood();
-})
+    return true;
+});
 
 function getfood() {
     console.log(food);
@@ -171,7 +173,7 @@ let dollar, getDollar;
     let dollar = 0;
     getDollar = function () {
         return dollar;
-    }
+    };
 }());
 
 dollar = 30;
@@ -184,7 +186,7 @@ var greet = 'Hello';
 (function () {
     var text = 'World';
     // console.log(greet + text);
-}())
+}());
 
 // Урок Замыкания 
 
@@ -192,7 +194,7 @@ function minus(a = 0) {
     return function (b) {
         if (!b) b = 0;
         return a - b;
-    }
+    };
 }
 
 // Урок Замыкания 
@@ -217,15 +219,15 @@ let module = (function () {
         }
         this.ResStr = Str;
         return this;
-    };
+    }
 
     function GetStr() {
         return this.ResStr;
-    };
+    }
 
     function GetLengthStr() {
         return this.ResStr.length;
-    };
+    }
 
     function GetReversStr() {
         let reversStr = '';
@@ -234,14 +236,14 @@ let module = (function () {
             reversStr += this.ResStr[i];
         }
         return reversStr;
-    };
+    }
 
     return {
         SetStr: SetStr,
         GetStr: GetStr,
         GetLengthStr: GetLengthStr,
         GetReversStr: GetReversStr
-    }
+    };
 })();
 
 // Урок Замыкания 
@@ -251,28 +253,28 @@ let Calc = (function () {
     function SetValue(Value) {
         CalcResultat = Value;
         return this;
-    };
+    }
 
     function Plus(Value) {
         CalcResultat += Value;
         return this;
-    };
+    }
 
     function Multiply(Value) {
         CalcResultat *= Value;
         return this;
-    };
+    }
 
     function GetValue() {
         return CalcResultat.toFixed(2);
-    };
+    }
 
     return {
         SetValue: SetValue,
         Plus: Plus,
         Multiply: Multiply,
         GetValue: GetValue
-    }
+    };
 })();
 
 // Урок Замыкания 
@@ -281,21 +283,21 @@ function makeBuffer() {
     let buf = '';
 
     function buffer(Value) {
-        if ((!(typeof Value === 'undefined'))) {
+        if ( typeof Value != 'undefined' ) {
             buf += Value;
             return this;
         } else {
             return buf;
-        };
-    };
+        }
+    }
 
     buffer.clear = function () {
         buf = '';
         return this;
-    }
+    };
 
     return buffer;
-};
+}
 
 let buffer = makeBuffer();
 
@@ -323,7 +325,7 @@ function byField(field) {
     return (function (a, b) {
         return a[field] > b[field] ? 1 : -1;
     });
-};
+}
 
 
 // Урок Замыкания 
@@ -339,7 +341,7 @@ function filter(arr, handler) {
 
     }
     return resArr;
-};
+}
 
 function inBetween(a, b) {
     return (function (Value) {
@@ -347,14 +349,14 @@ function inBetween(a, b) {
             return true;
         } else {
             return false;
-        };
+        }
     });
-};
+}
 
 function inArray(array) {
     return function (x) {
         return array.indexOf(x) != -1;
-    }
+    };
 }
 
 
@@ -391,14 +393,13 @@ function autoReplace(needless, change, haystack) {
 
 function makeArmy() {
 
-    var shooters = [];
+    let shooters = [];
     let nbr = [];
-    
 
-    for (var i = 0; i < 10; i++) {
-        nbr[i] = i;
-        var shooter = function () { // функция-стрелок
-            alert(nbr[i]); // выводит свой номер
+
+    for (let i = 0; i < 10; i++) {
+        let shooter = function () { // функция-стрелок
+            alert(i); // выводит свой номер
         };
         shooters.push(shooter);
     }
@@ -410,4 +411,4 @@ var army = makeArmy();
 
 army[0](); // стрелок выводит 10, а должен 0
 army[5](); // стрелок выводит 10...
-  // .. все стрелки выводят 10 вместо 0,1,2...9
+// .. все стрелки выводят 10 вместо 0,1,2...9
