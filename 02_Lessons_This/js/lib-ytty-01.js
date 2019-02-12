@@ -1,5 +1,5 @@
 // *******************************************************
-// My first js-library 
+// My first js-library YTTY v1.0.0
 // *******************************************************
 
 ;(function () {
@@ -7,6 +7,7 @@
     function ytty () {
 
     }
+
     
     // Export уtty
     window.ytty = ytty;
