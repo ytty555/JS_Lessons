@@ -357,6 +357,7 @@ function makeArmy() {
 
     var shooters = [];
     let nbr = [];
+    
 
     for (var i = 0; i < 10; i++) {
         nbr[i] = i;
