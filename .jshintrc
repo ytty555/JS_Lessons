@@ -1,0 +1,6 @@
+{
+    "camelcase": true,
+    "indent": 2,
+    "strict": true,
+    "esversion": 6
+}
