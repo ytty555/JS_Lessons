@@ -20,6 +20,12 @@ function targetKey (keyCode) {
 // Устанавливаем класс, стиль которого подсветит "клавишу" на экране
 function SetPlayingClass (key) {
     let div = document.querySelector(`div[data-key="${key}"]`);
+    let audio = document.querySelector(`audio[data-key="${key}"]`);
+    
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+    
     div.classList.toggle('playing');
     
     setTimeout(DelClass, 100);
