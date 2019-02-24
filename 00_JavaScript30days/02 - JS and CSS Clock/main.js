@@ -1,3 +1,8 @@
+const handSec = document.querySelector('div.second-hand');
+const handMin = document.querySelector('div.min-hand');
+const handHour = document.querySelector('div.hour-hand');
+
+
 function setDate() {
     'use strict';
     
@@ -10,13 +15,8 @@ function setDate() {
     let degSec = timeSec * (360 / 60) + 90;
     let degHour = timeHour * (360 / 24) + 90;
 
-    let handSec = document.querySelector('div.second-hand');
     handSec.style.transform = `rotate(${degSec}deg)`;
-
-    let handMin = document.querySelector('div.min-hand');
     handMin.style.transform = `rotate(${degMin}deg)`;
-
-    let handHour = document.querySelector('div.hour-hand');
     handHour.style.transform = `rotate(${degHour}deg)`;
 
 }
