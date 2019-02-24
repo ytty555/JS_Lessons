@@ -1,16 +1,60 @@
+function Machine(power) {
+    this._enabled = false;
+
+    this.enable = function () {
+        this._enabled = true;
+    };
+    this.disable = function () {
+        this._enabled = false;
+    };
+}
+
+function Fridge(power) {
+    Machine.apply(this, arguments);
+
+    let food = [];
+    let maxFood = Math.round(power / 100);
+
+    this.addFood = function (...arr) {
+        if (!this._enabled) {
+            console.log('Ошибка. Холодильник выключен');
+            return;
+        }
+
+        for (let i = 0; i < arr.length; i++) {
+            if (food.length < maxFood) {
+                food.push(arr[i]);
+            } else {
+                console.log(`Холодильник переполнен. Количество еды в нем = ${food.length}`);
+            }
+        }
+    };
+
+    this.getFood = function () {
+        return food.slice;
+    };
+
+}
+
 function CoffeMachine(power, capacity) {
-    'use strict';
+    Machine.apply(this, arguments);
 
     let waterAmount = 0;
     let WATER_HEAT_CAPASITY = 4200;
     let timerID;
+    let disableParent = this.disable;
+
+    this.disable = function (args) {
+        disableParent.apply(this, args);
+        this.stop();
+    };
 
     function getBoilTime() {
         return waterAmount * WATER_HEAT_CAPASITY * 80 / power;
     }
 
     function onReady() {
-        alert('Кофе готов!');
+        console.log('Кофе готов!');
     }
 
     this.waterAmount = function (amount) {
@@ -45,6 +89,11 @@ function CoffeMachine(power, capacity) {
     };
 
     this.run = function () {
+        if (!this._enabled) {
+            console.log('Кофемашина выключена');
+            return;
+        }
+
         timerID = setTimeout(function () {
                 timerID = null;
                 onReady();
@@ -68,19 +117,13 @@ function CoffeMachine(power, capacity) {
             return false;
         }
     };
+
 }
 
 let coffeMachine = new CoffeMachine(50000, 1000);
-coffeMachine.addWater(950);
-alert(coffeMachine.waterAmount());
 
-
-alert('До:' + coffeMachine.isRunning());
-coffeMachine.run();
-alert('В процессе:' + coffeMachine.isRunning());
-
-coffeMachine.setOnReady(function () {
-    var amount = coffeMachine.waterAmount();
-    alert('Готов кофе: ' + amount + 'мл ' + coffeMachine.isRunning()); // Кофе готов: 150 мл
-});
-// coffeMachine.stop();
+let fridge = new Fridge(600);
+fridge.enable();
+fridge.addFood('Продукт1', 'Продукт2', 'Продукт3', 'Продукт4', 'Продукт5');
+fridge.addFood('Напиток1', 'Напиток2', 'Напиток3', 'Напиток4', 'Напиток5');
+console.log(fridge.getFood());
