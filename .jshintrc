@@ -1,5 +1,9 @@
 {
     "esversion": 6,
-    "camelcase": true,
-    "strict": true
-}
+    "undef": true,
+    "browser": true,
+    "unused": true,
+    "globals": {
+      "MY_GLOBAL": true
+    }
+  }
