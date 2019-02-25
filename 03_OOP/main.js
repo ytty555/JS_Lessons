@@ -30,8 +30,20 @@ function Fridge(power) {
         }
     };
 
+    this.removeFood = function (...items) {
+        if (!items.length) return console.log('Нечего убирать из холодильника. Список продуктов пуст.');
+        if (!food.length) return console.log('Нечего убирать из холодильника. Холодильник пуст.');
+
+        for (let i = 0; i < items.length; i++) {
+            let prodIndex = food.indexOf(items[i]);
+            if (!(prodIndex == -1)) food.splice(prodIndex, 1);
+        }
+
+        console.log(this.getFood());
+    };
+
     this.getFood = function () {
-        return food.slice;
+        return food;
     };
 
 }
@@ -122,8 +134,11 @@ function CoffeMachine(power, capacity) {
 
 let coffeMachine = new CoffeMachine(50000, 1000);
 
-let fridge = new Fridge(600);
+let fridge = new Fridge(1600);
 fridge.enable();
 fridge.addFood('Продукт1', 'Продукт2', 'Продукт3', 'Продукт4', 'Продукт5');
 fridge.addFood('Напиток1', 'Напиток2', 'Напиток3', 'Напиток4', 'Напиток5');
 console.log(fridge.getFood());
+setTimeout(() => {
+    fridge.removeFood('Продукт1', 'Вино', 'Продукт2');
+}, 3000);
