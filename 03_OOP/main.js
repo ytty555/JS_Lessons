@@ -14,6 +14,12 @@ function Fridge(power) {
 
     let food = [];
     let maxFood = Math.round(power / 100);
+    let parentDisable = this.disable;
+
+    this.disable = function() {
+        if (food.length) return console.log('Холодильник не может быть выключен, т.к. в нем есть продукты.');
+        parentDisable.call(this);
+    }
 
     this.addFood = function (...arr) {
         if (!this._enabled) {
@@ -136,9 +142,7 @@ let coffeMachine = new CoffeMachine(50000, 1000);
 
 let fridge = new Fridge(1600);
 fridge.enable();
-fridge.addFood('Продукт1', 'Продукт2', 'Продукт3', 'Продукт4', 'Продукт5');
-fridge.addFood('Напиток1', 'Напиток2', 'Напиток3', 'Напиток4', 'Напиток5');
-console.log(fridge.getFood());
-setTimeout(() => {
-    fridge.removeFood('Продукт1', 'Вино', 'Продукт2');
-}, 3000);
+console.log(fridge._enabled);
+fridge.addFood('Пиво')
+fridge.disable();
+console.log(fridge._enabled);
