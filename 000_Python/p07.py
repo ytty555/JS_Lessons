@@ -1,22 +1,17 @@
 arr = [int(i) for i in input().split()]
 
+working_arr = []
 
-def check_position(arr, i):
-    if arr[i] == arr[0]:
-        return [False, True]
-    elif arr[i] == arr[-1]:
-        return [True, False]
-    else:
-        return [True, True]
+working_arr.append(arr[-1])
 
+for n in arr:
+    working_arr.append(n)
+
+working_arr.append(arr[0])
 
 for i in range(len(arr)):
-    pos = check_position(arr, i)
-    if pos[0] and pos[1]:
-        res = arr[i - 1] + arr[(i + 1)]
-    elif (not pos[0]) and pos[1]:
-        res = arr[-1] + arr[(i + 1)]
-    elif pos[0] and (not pos[1]):
-        res = arr[0] + arr[-2]
-
+    if len(arr) == 1:
+        res = arr[0]
+    else:
+        res = working_arr[i] + working_arr[i + 2]
     print(res, end=' ')
