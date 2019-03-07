@@ -18,6 +18,11 @@ class VideoPlayer {
         // All events
         this.video.addEventListener('click', () => this.togglePlay());
         this.toggle.addEventListener('click', () => this.togglePlay());
+        this.skipButtons.forEach((btn) => {
+            btn.addEventListener('click', (btn) => {
+                this.skip(btn);
+            });
+        });
     }
 
     togglePlay() {
@@ -26,8 +31,10 @@ class VideoPlayer {
         this.toggle.textContent = this.video.paused ? '⏵' : '⏸';
     }
 
-    skip() {
+    skip(btn) {
         // Skip time video
+        let value = btn.target.dataset.skip;
+        console.dir(value);
 
     }
 }
