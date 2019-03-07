@@ -16,13 +16,13 @@ class VideoPlayer {
 
     events() {
         // All events
-        this.video.addEventListener('click', e => this.togglePlay());
-        this.toggle.addEventListener('click', e => this.togglePlay());
+        this.video.addEventListener('click', () => this.togglePlay());
+        this.toggle.addEventListener('click', () => this.togglePlay());
     }
 
     togglePlay() {
         // Play/Pause video
-        this.video[this.video.paused ? 'play' : 'pause']();  
+        this.video[this.video.paused ? 'play' : 'pause']();
         this.toggle.textContent = this.video.paused ? '⏵' : '⏸';
     }
 
