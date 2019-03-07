@@ -11,14 +11,27 @@ class VideoPlayer {
 
     init() {
         // Start pluging
+        this.events();
     }
 
     events() {
         // All events
-        
+        this.video.addEventListener('click', e => this.togglePlay());
+        this.toggle.addEventListener('click', e => this.togglePlay());
+    }
+
+    togglePlay() {
+        // Play/Pause video
+        this.video[this.video.paused ? 'play' : 'pause']();  
+        this.toggle.textContent = this.video.paused ? '⏵' : '⏸';
+    }
+
+    skip() {
+        // Skip time video
+
     }
 }
 
 const video = new VideoPlayer();
 
-console.log(video)
+video.init();
