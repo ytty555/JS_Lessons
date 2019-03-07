@@ -1,3 +1,9 @@
 {
-    "esversion": 6
-}
+    "esversion": 6,
+    "undef": true,
+    "browser": true,
+    "unused": true,
+    "globals": {
+      "MY_GLOBAL": true
+    }
+  }
