@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>hand-clock</title>
+</head>
+
+<body>
+
+
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
+      <div class="clock-center"></div>
+      <div class="clock-center-small"></div>
+    </div>
+  </div>
+
+
+  <style>
+    html {
+      background: rgb(130, 147, 158);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 20px solid rgb(98, 104, 116);
+      border-radius: 50%;
+      margin: 50px auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(197, 157, 157, 0.1),
+        inset 0 0 0 3px rgb(151, 151, 151),
+        inset 0 0 10px black,
+        0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px);
+      /* account for the height of the clock hands */
+    }
+
+    .hand {
+      border-radius: 35%;
+      position: absolute;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0, 2.7, 0.58, 1);
+    }
+
+    .second-hand {
+      background: rgb(39, 19, 19);
+      width: 60%;
+      height: 2px;
+      top: 50%;
+      transform-origin: 83.3333%;
+      z-index: 1;
+    }
+
+    .min-hand {
+      background: darkred;
+      width: 60%;
+      height: 12px;
+      top: 48.5%;
+      transform-origin: 83.3333%;
+    }
+
+    .hour-hand {
+      background: rgb(99, 1, 1);
+      width: 40%;
+      height: 12px;
+      top: 48.5%;
+      left: 20%;
+      transform-origin: 75%;
+    }
+
+    .clock-center {
+      position: absolute;
+      background:rgb(130, 147, 158);
+      top: 46.5%;
+      left: 46%;
+      height: 8%;
+      width: 8%;
+      border-radius: 100%;
+    }
+
+    .clock-center-small {
+      position: absolute;
+      background: darkred;
+      top: 49.5%;
+      left: 49%;
+      height: 2%;
+      width: 2%;
+      border-radius: 100%;
+      z-index: 2;
+    }
+  </style>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
