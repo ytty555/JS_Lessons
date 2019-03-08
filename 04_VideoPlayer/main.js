@@ -18,11 +18,9 @@ class VideoPlayer {
         // All events
         this.video.addEventListener('click', () => this.togglePlay());
         this.toggle.addEventListener('click', () => this.togglePlay());
-        this.skipButtons.forEach((btn) => {
-            btn.addEventListener('click', (btn) => {
-                this.skip(btn);
-            });
-        });
+        this.ranges.forEach(range => range.addEventListener('change', e => this.handleRangeUpdate(e)));
+        this.ranges.forEach(range => range.addEventListener('mousemove', e => this.handleRangeUpdate(e)));
+        this.skipButtons.forEach(btn => btn.addEventListener('click', e => this.skip(e)));
     }
 
     togglePlay() {
@@ -31,11 +29,14 @@ class VideoPlayer {
         this.toggle.textContent = this.video.paused ? '⏵' : '⏸';
     }
 
-    skip(btn) {
-        // Skip time video
-        let value = btn.target.dataset.skip;
-        console.dir(value);
+    handleRangeUpdate(e) {
+        // Range change
+        this.video[e.target.name] = e.target.value;
+    }
 
+    skip(e) {
+        // Skip time video
+        this.video.currentTime += parseFloat(e.target.dataset.skip);
     }
 }
 
