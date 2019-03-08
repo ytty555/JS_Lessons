@@ -1,0 +1,16 @@
+video {
+    border: 2px solid rgb(255, 94, 0);
+    border-radius: 1%;
+    width: 600px;
+}
+
+.progress, .progress__filled {
+    width: 604px;
+    height: 10px;
+    background-color: rgb(182, 182, 182);
+}
+
+.progress__filled {
+    /* width: 300px; */
+    background-color: rgb(255, 94, 0);
+}

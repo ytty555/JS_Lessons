@@ -7,6 +7,7 @@ class VideoPlayer {
         this.toggle = this.player.querySelector('.toggle');
         this.skipButtons = this.player.querySelectorAll('[data-skip]');
         this.ranges = this.player.querySelectorAll('.player__slider');
+        this.width = 604;
     }
 
     init() {
@@ -21,6 +22,8 @@ class VideoPlayer {
         this.ranges.forEach(range => range.addEventListener('change', e => this.handleRangeUpdate(e)));
         this.ranges.forEach(range => range.addEventListener('mousemove', e => this.handleRangeUpdate(e)));
         this.skipButtons.forEach(btn => btn.addEventListener('click', e => this.skip(e)));
+        this.video.addEventListener('timeupdate', () => this.displayCurrTime());
+        this.progress.addEventListener('click', e => this.changeVideoPosition(e));
     }
 
     togglePlay() {
@@ -37,6 +40,24 @@ class VideoPlayer {
     skip(e) {
         // Skip time video
         this.video.currentTime += parseFloat(e.target.dataset.skip);
+    }
+
+    displayCurrTime() {
+        let currTime = this.video.currentTime;
+        let duration = this.video.duration;
+        let width = this.width;
+        let position = Math.round(width * currTime / duration);
+
+        this.progressBar.style.width = position + "px";
+    }
+
+    changeVideoPosition(e) {
+        let x = e.offsetX;
+        let width = this.width;
+        let newPersent = x / width;
+        let duration = this.video.duration;
+
+        this.video.currentTime = duration * newPersent;
     }
 }
 
