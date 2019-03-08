@@ -8,11 +8,17 @@ class VideoPlayer {
         this.skipButtons = this.player.querySelectorAll('[data-skip]');
         this.ranges = this.player.querySelectorAll('.player__slider');
         this.width = 604;
+        this.defaultSettings = {
+            volume: "0.2",
+            playbackRate: "1",
+            currentTime: 0
+        };
     }
 
     init() {
         // Start pluging
         this.events();
+        this.getSettings();
     }
 
     events() {
@@ -25,6 +31,52 @@ class VideoPlayer {
         this.video.addEventListener('timeupdate', () => this.displayCurrTime());
         this.progress.addEventListener('click', e => this.changeVideoPosition(e));
     }
+
+    getSettings() {
+        let settings = {};
+        let lsSettingsJSON = localStorage.getItem("videoPlayerSettings");
+        if (lsSettingsJSON) {
+            settings = JSON.parse(lsSettingsJSON);
+        } else {
+            settings = this.defaultSettings;
+        }
+
+        this.ranges.forEach(range => {
+            if (range.name == 'volume') {
+                range.value = settings.volume;
+            } else {
+                range.value = settings.playbackRate;
+            }
+        });
+
+        this.video.currentTime = settings.currentTime;
+        this.video.volume = settings.volume;
+        this.video.playbackRate = settings.playbackRate;
+    }
+
+    setSettings() {
+        let vl, plbr, ct;
+        this.ranges.forEach((range) => {
+            if (range.name == 'volume') {
+                vl = range.value;
+            } else {
+                plbr = range.value;
+            }
+        });
+        ct = this.video.currentTime;
+        
+        const settings = {
+            volume: vl,
+            playbackRate: plbr,
+            currentTime: ct
+        };
+
+        const settingsJSON = JSON.stringify(settings);
+
+        localStorage.setItem("videoPlayerSettings", settingsJSON);
+
+    }
+
 
     togglePlay() {
         // Play/Pause video
@@ -49,6 +101,8 @@ class VideoPlayer {
         let position = Math.round(width * currTime / duration);
 
         this.progressBar.style.width = position + "px";
+
+        this.setSettings();
     }
 
     changeVideoPosition(e) {
